@@ -7,4 +7,5 @@ return (<div>
     <img src={pic} alt=""/>
 </div>)
 }
+
 export default Character;
