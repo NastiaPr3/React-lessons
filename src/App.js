@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
+import Users from './components/users/Users';
+import {getUsersPosts} from './services/user.api.servicers';
+import {useState} from 'react';
 import './App.css';
+import Posts from "./components/posts/Posts";
 
-function App() {
+export default function App() {
+
+  let [posts, setPosts] = useState([]);
+  const show = (id) => {
+    getUsersPosts(id).then(({data}) => {
+      setPosts([...data]);
+    })
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={'df'}>
+      <div className={'left'}><Users show={show}/></div>
+      <div className={'right'}>
+        <Posts posts={posts}/>
+      </div>
+
     </div>
   );
 }
 
-export default App;
